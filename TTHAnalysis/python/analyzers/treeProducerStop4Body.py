@@ -1,5 +1,5 @@
 from CMGTools.TTHAnalysis.analyzers.treeProducerSusyCore import *
-from CMGTools.TTHAnalysis.analyzers.ntupleTypes import *
+from CMGTools.TTHAnalysis.analyzers.ntupleTypesStop4Body import *
 
 susyStop4Body_globalVariables = susyCore_globalVariables + [
             ## ------- HT from LHE event, needed for merging HT binned samples (requires LHE analyzer to have run)  ---------------------------------- #
@@ -62,9 +62,9 @@ susyStop4Body_globalVariables = susyCore_globalVariables + [
 
 
             ##-------- custom quantities ------------------------------------------
-            NTupleVariable("event_mtw", lambda ev: ev.mtw, help="mt(l,met)"),
-            NTupleVariable("event_mtw1", lambda ev: ev.mtw1, help="1- 80*80/2*met*pt"),
-            NTupleVariable("event_mtw2", lambda ev: ev.mtw2, help="cos (phi)"),
+           # NTupleVariable("event_mtw", lambda ev: ev.mtw, help="mt(l,met)"),
+           # NTupleVariable("event_mtw1", lambda ev: ev.mtw1, help="1- 80*80/2*met*pt"),
+           # NTupleVariable("event_mtw2", lambda ev: ev.mtw2, help="cos (phi)"),
 
             ##-------- MET filter information ------------------------------------------
             #NTupleVariable("Flag_HBHENoiseFilter_fix", lambda ev: getattr(ev, "ev.hbheFilterNew", 0), help="HBEHE baseline temporary filter decision"),
@@ -83,12 +83,12 @@ susyStop4Body_collections = susyCore_collections.copy()
 susyStop4Body_collections.update({
             ## ---------------------------------------------
             "selectedTaus"     : NTupleCollection("TauGood",   tauTypeSusy,                8,              help="Taus after the preselection"),
-            "selectedLeptons"  : NTupleCollection("LepGood",   leptonTypeSusy,          8,              help="Leptons after the preselection"),
-            "otherLeptons"     : NTupleCollection("LepOther",  leptonTypeSusy,          8,              help="Leptons after the preselection"),
+            "selectedLeptons"  : NTupleCollection("LepGood",   leptonTypeStop4Body,          8,              help="Leptons after the preselection"),
+            "otherLeptons"     : NTupleCollection("LepOther",  leptonTypeStop4Body,          8,              help="Leptons after the preselection"),
             ## ---------------------------------------------
             "cleanJetsAll"     : NTupleCollection("Jet",       jetTypeSusy,               30,              help="Cental jets after full selection and cleaning, sorted by pt"),
-#            "jets"             : NTupleCollection("JetDirty",  genJetType,                25,              help="Cental jets after full selection but before cleaning, sorted by pt"),
-#            "cleanGenJets"     : NTupleCollection("GenJet",    genJetType,                30,              help="Clean Gen Jets, sorted by pt"),
+            "jets"             : NTupleCollection("JetDirty",  genJetType,                25,              help="Cental jets after full selection but before cleaning, sorted by pt"),
+            "cleanGenJets"     : NTupleCollection("GenJet",    genJetType,                30,              help="Clean Gen Jets, sorted by pt"),
             ## ---------------------------------------------
             #"ivf"              : NTupleCollection("SV",        svType,                    20,              help="SVs from IVF"),
             ## ---------------------------------------------
@@ -96,4 +96,3 @@ susyStop4Body_collections.update({
             ## ---------------------------------------------
             "LHE_weights"      : NTupleCollection("LHEweight", weightsInfoType,         1000, mcOnly=True, help="LHE weight info"),
 })
-
